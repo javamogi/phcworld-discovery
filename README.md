@@ -14,3 +14,10 @@ Spring Cloud Eureka는 서비스들이 자동으로 등록되고 찾을 수 있�
 *** 
 ### MSA
 ![Blank diagram](https://github.com/javamogi/phcworld-discovery/assets/40781237/937cf791-1f37-47d2-8f3c-57e1127636de)
+*** 
+#### [PHC-WORLD Config](https://github.com/javamogi/phc-world-config)
+#### [PHC-WORLD Config File Repository(private)](https://github.com/javamogi/phc-world-git-repo)
+#### [PHC-WORLD Gateway](https://github.com/javamogi/phc-world-gateway)
+#### [PHC-WORLD User-Service](https://github.com/javamogi/phc-world-user-service)
+#### [PHC-WORLD Board-Service](https://github.com/javamogi/phc-world-board-service)
+#### [PHC-WORLD Answer-Service](https://github.com/javamogi/phc-world-board-answer-service)
