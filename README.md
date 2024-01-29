@@ -4,7 +4,7 @@
 * 단순 CRUD 게시판이지만 MSA를 이해하기 위한 프로젝트입니다.
 * 모든 MSA구성 요소의 Docker Image가 준비되었다면 docker-compose yml파일을 실행할 수 있습니다.
 ```
-docker-compose -f ./docker-compose-phc-world.yml
+docker-compose -f ./docker-compose-phc-world.yml up -d
 ```
 * Docker Image build는 각 프로젝트 Dockerfile로 이미지를 만들 수 있습니다.
 *** 
