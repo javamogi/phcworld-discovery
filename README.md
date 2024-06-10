@@ -8,7 +8,8 @@
 ```
 docker-compose -f ./docker-compose-phc-world.yml up -d
 ```
-* https://documenter.getpostman.com/view/32099163/2sA3XLEjQZ
+> API 명세서
+> https://documenter.getpostman.com/view/32099163/2sA3XLEjQZ
 *** 
 #### Eureka 간단 설명
 * Spring Cloud Eureka는 서비스들이 자동으로 등록되고 찾을 수 있도록 해주며, 이를 통해 마이크로서비스 간의 통신이 쉽게 이루어집니다. 주요 구성 요소로는 Eureka Server와 Eureka Client가 있습니다.
