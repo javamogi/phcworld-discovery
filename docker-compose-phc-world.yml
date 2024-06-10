@@ -66,7 +66,8 @@ services:
       KAFKA_JMX_HOSTNAME: localhost
 
   kafka-connect:
-    image: confluentinc/cp-kafka-connect:7.5.3
+    # image: confluentinc/cp-kafka-connect:7.5.3
+    image: javamogi/kafka-connect
     container_name: kafka-connect
     networks:
       - phc-world
@@ -100,7 +101,7 @@ services:
       - |
         confluent-hub install --no-prompt confluentinc/kafka-connect-jdbc:10.7.4
         confluent-hub install --no-prompt debezium/debezium-connector-mysql:2.2.1
-        /etc/confluent/docker/run
+        /etc/kafka/scripts/start.sh
   rabbitmq:
     container_name: rabbitmq
     networks:
