@@ -162,7 +162,7 @@ services:
         condition: service_healthy
       discovery-service:
         condition: service_healthy
-    image: javamogi/gateway-service:1.0
+    image: javamogi/gateway-service:1.1
     networks:
       - phc-world
     ports:
