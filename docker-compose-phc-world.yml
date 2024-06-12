@@ -190,7 +190,7 @@ services:
       gateway-service:
         condition: service_healthy
     # command: ["java", "-jar", "UserService.jar"]
-    image: javamogi/user-service:1.0
+    image: javamogi/user-service:1.1
     networks:
       - phc-world
     environment:
