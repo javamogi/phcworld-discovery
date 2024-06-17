@@ -30,8 +30,13 @@ docker-compose -f ./docker-compose-phc-world.yml up -d
 * MSA 특성상 각 서비스가 독립되어 있기 때문에 각 서비스에도 토큰을 검사합니다.
 * 각 서비스의 JWT 관련 코드가 중복되지만 보안상 각 서비스에서도 검사해야한다고 생각했습니다.
 * 모든 서비스는 토큰에 담겨있는 회원 고유 아이디를 파싱하여 사용하여 회원을 감별합니다.
-* 회원은 보안상 UNIQUE로 UUID 생성 값을 사용하여 식별하였습니다.
+* 회원은 보안상 UNIQUE 제약 조건으로 UUID 생성 값을 사용하여 식별하였습니다.
 * 게시글과 답변은 빠른 조회를 위해 DB AUTO_INCREMENT PK값을 식별자로 사용하였습니다.
+* 현재는 하나의 DB를 사용하지만 각 서비스별 DB가 있다는 가정으로 board-service에서는 조회 때 사용할 회원 정보를 따로 DB에 저장하여 사용합니다.
+  * 회원 등록 및 수정에 사용하는 kafka-topic으로 consumer로 구현하여 user-service에서 등록 및 수정이 이루어진다면 board-service에도 식별자 user_id로 등록 및 수정이 진행됩니다.
+  * 회원 아이디만 저장하여 회원 정보가 필요한 요청에서 user-service에서 회원 정보를 호출하여 사용하였지만 성능 저하와 service의 독립성을 확보하기 위해서 Sub Entity로 저장하였습니다.
+  * 만약 모든 서비스에서 회원 정보가 필요하다면 모든 서비스에 User Sub Entity가 필요하므로 이에 대해서는 고민을 하고 있습니다.
+  * 회원의 정보는 JWT가 보장하기 때문에 따로 회원 정보에 대해서 확인을 안해도 될거라 생각하지만 이 부분도 고민을 하고 있습니다.
 * 만약 프론트에서 게시글 및 답변 생성 후 고유값이 필요하다면 AUTO_INCREMENT와 다른 값으로 대체해야합니다.
 ***
 #### [PHC-WORLD Config](https://github.com/javamogi/phc-world-config)
