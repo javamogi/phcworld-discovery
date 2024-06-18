@@ -194,6 +194,7 @@ services:
     networks:
       - phc-world
     environment:
+      TZ: Asia/Seoul
       spring.cloud.config.uri: http://config-service:8888
       eureka.client.service-url.defaultZone: http://discovery-service:8761/eureka
       spring.rabbitmq.host: rabbitmq
@@ -216,6 +217,7 @@ services:
     networks:
       - phc-world
     environment:
+      TZ: Asia/Seoul
       spring.cloud.config.uri: http://config-service:8888
       eureka.client.service-url.defaultZone: http://discovery-service:8761/eureka
       spring.rabbitmq.host: rabbitmq
@@ -237,6 +239,7 @@ services:
     networks:
       - phc-world
     environment:
+      TZ: Asia/Seoul
       spring.cloud.config.uri: http://config-service:8888
       eureka.client.service-url.defaultZone: http://discovery-service:8761/eureka
       spring.rabbitmq.host: rabbitmq
