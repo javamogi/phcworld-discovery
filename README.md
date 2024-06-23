@@ -21,7 +21,7 @@ docker-compose -f ./docker-compose-phc-world.yml up -d
 > * Gradle 8.5
 *** 
 ### MSA
-![Blank diagram](https://github.com/javamogi/phcworld-discovery/assets/40781237/937cf791-1f37-47d2-8f3c-57e1127636de)
+![msa](https://github.com/javamogi/phcworld-discovery/assets/40781237/ba8b1fde-093d-46d7-874c-f92c2cc7fa60)
 *** 
 ### 설명
 * 회원, 게시글, 답변은 insert, update를 kafka-connect로 DB와 연동하여 사용합니다.
@@ -32,12 +32,15 @@ docker-compose -f ./docker-compose-phc-world.yml up -d
 * 모든 서비스는 토큰에 담겨있는 회원 고유 아이디를 파싱하여 사용하여 회원을 감별합니다.
 * 회원은 보안상 UNIQUE 제약 조건으로 UUID 생성 값을 사용하여 식별하였습니다.
 * 게시글과 답변은 빠른 조회를 위해 DB AUTO_INCREMENT PK값을 식별자로 사용하였습니다.
-* 현재는 하나의 DB를 사용하지만 각 서비스별 DB가 있다는 가정으로 board-service에서는 조회 때 사용할 회원 정보를 따로 DB에 저장하여 사용합니다.
-  * 회원 등록 및 수정에 사용하는 kafka-topic으로 consumer로 구현하여 user-service에서 등록 및 수정이 이루어진다면 board-service에도 식별자 user_id로 등록 및 수정이 진행됩니다.
-  * 회원 아이디만 저장하여 회원 정보가 필요한 요청에서 user-service에서 회원 정보를 호출하여 사용하였지만 성능 저하와 service의 독립성을 확보하기 위해서 Sub Entity로 저장하였습니다.
-  * 만약 모든 서비스에서 회원 정보가 필요하다면 모든 서비스에 User Sub Entity가 필요하므로 이에 대해서는 고민을 하고 있습니다.
+* 하나의 DB를 사용하지만 각 서비스별 DB가 있다는 가정으로 각 서비스와 통신합니다.
+  * ~~board-service에서는 조회 때 사용할 회원 정보를 따로 DB에 저장하여 사용합니다.~~
+  * ~~회원 등록 및 수정에 사용하는 kafka-topic으로 consumer로 구현하여 user-service에서 등록 및 수정이 이루어진다면 board-service에도 식별자 user_id로 등록 및 수정이 진행됩니다.~~
+  * ~~회원 아이디만 저장하여 회원 정보가 필요한 요청에서 user-service에서 회원 정보를 호출하여 사용하였지만 성능 저하와 service의 독립성을 확보하기 위해서 Sub Entity로 저장하였습니다.~~
+  * 만약 모든 서비스에서 회원 정보가 필요하다면 모든 서비스에 User Sub Entity가 필요하므로 이에 대해서는 고민하여 통신을 통하여 정보를 받는 것으로 변경하였습니다.
   * 회원의 정보는 JWT가 보장하기 때문에 따로 회원 정보에 대해서 확인을 안해도 될거라 생각하지만 이 부분도 고민을 하고 있습니다.
 * 만약 프론트에서 게시글 및 답변 생성 후 고유값이 필요하다면 AUTO_INCREMENT와 다른 값으로 대체해야합니다.
+* 회원 서비스에만 CQRS 패턴을 적용하였고 데이터베이스를 replica로 나누어 Master는 Command(insert, update, delete)를 담당하고 Slave는 Query(select)를 담당합니다.
+* 현재는 Redis로 Query를 담당하기 위해 구현중에 있습니다.
 ***
 #### [PHC-WORLD Config](https://github.com/javamogi/phc-world-config)
 #### [PHC-WORLD Config File Repository(private)](https://github.com/javamogi/phc-world-git-repo)
