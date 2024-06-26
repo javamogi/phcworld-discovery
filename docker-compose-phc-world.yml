@@ -82,6 +82,14 @@ services:
       - --lower_case_table_names=1
       - --default-authentication-plugin=mysql_native_password 
 
+  redis:
+    image: redis
+    container_name: redis
+    networks:
+      - phc-world
+    ports:
+      - 6379:6379
+  
   zookeeper:
     image: confluentinc/cp-zookeeper:7.5.3
     hostname: zookeeper
@@ -243,7 +251,7 @@ services:
       gateway-service:
         condition: service_healthy
     # command: ["java", "-jar", "UserService.jar"]
-    image: javamogi/user-service:1.2
+    image: javamogi/user-service:1.3
     networks:
       - phc-world
     environment:
@@ -255,6 +263,7 @@ services:
       spring.datasource.master.jdbc-url: "jdbc:mysql://mysql:3306/test?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul&characterEncoding=UTF-8"
       spring.datasource.slave.jdbc-url: "jdbc:mysql://slave:3306/test?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul&characterEncoding=UTF-8"
       gateway.ip: gateway-service
+      spring.data.redis.host: redis
   board-service:
     container_name: board-service
     depends_on:
