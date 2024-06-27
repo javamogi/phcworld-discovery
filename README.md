@@ -40,7 +40,7 @@ docker-compose -f ./docker-compose-phc-world.yml up -d
   * 회원의 정보는 JWT가 보장하기 때문에 따로 회원 정보에 대해서 확인을 안해도 될거라 생각하지만 이 부분도 고민을 하고 있습니다.
 * 만약 프론트에서 게시글 및 답변 생성 후 고유값이 필요하다면 AUTO_INCREMENT와 다른 값으로 대체해야합니다.
 * 회원 서비스에만 CQRS 패턴을 적용하였고 데이터베이스를 replica로 나누어 Master는 Command(insert, update, delete)를 담당하고 ~~Slave는 Query(select)를 담당합니다~~.
-* MySQL replica는 데이터 백업용으로 나두고 Redis를 사용하여 읽기 측면의 성능을 향상시켰습니다.
+* MySQL replica는 데이터 백업용으로 사용하고 Redis를 사용하여 읽기 측면의 성능을 향상시켰습니다.
 ***
 #### [PHC-WORLD Config](https://github.com/javamogi/phc-world-config)
 #### [PHC-WORLD Config File Repository(private)](https://github.com/javamogi/phc-world-git-repo)
